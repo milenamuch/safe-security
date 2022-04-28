@@ -62,5 +62,10 @@ namespace Controllers
 
             return tag;
         }
+
+        public static IEnumerable<Tag> GetTags()
+        {
+            return Tag.GetTags();
+        }
     }
 }

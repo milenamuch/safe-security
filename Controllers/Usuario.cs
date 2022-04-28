@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Repository;
+using System.Text.RegularExpressions;
 
 namespace Controllers
 {
@@ -17,6 +18,12 @@ namespace Controllers
             if (String.IsNullOrEmpty(Nome))
             {
                 throw new Exception("O nome é obrigatório.");
+            }
+
+            Regex rx = new Regex("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$");
+            if (String.IsNullOrEmpty(Email) || !rx.IsMatch(Email))
+            {
+                throw new Exception("Email inválido");
             }
 
             if (String.IsNullOrEmpty(Senha))
@@ -76,6 +83,11 @@ namespace Controllers
             }
 
             return usuario;
+        }
+
+        public static IEnumerable<Usuario> GetUsuarios()
+        {
+            return Usuario.GetUsuarios();
         }
 
     }

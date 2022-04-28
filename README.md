@@ -76,9 +76,9 @@ Para essa aplicação serão necessárias as seguintes tarefas:
     - [x] Criar controller de usuário
     - [ ] Criar tela login
     - [ ] Criar validação de login
-    - [ ] Validação de email
+    - [x] Validação de email
 - [ ] Menu Principal (01/05)
-    - [ ]Tela de menu
+    - [ ] Tela de menu
 - [ ] Lista de Categorias
 - [ ] Lista de Tags
 - [ ] Lista de Usuários
