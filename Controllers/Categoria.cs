@@ -76,5 +76,10 @@ namespace Controllers
 
             return categoria;
         }
+
+        public static IEnumerable<Categoria> GetCategorias()
+        {
+            return Categoria.GetCategorias();
+        }
     }
 }

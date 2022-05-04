@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Repository;
+using System.Text.RegularExpressions;
 
 namespace Controllers
 {
@@ -17,6 +18,16 @@ namespace Controllers
             if (String.IsNullOrEmpty(Nome))
             {
                 throw new Exception("O nome é obrigatório.");
+            }
+
+            if (String.IsNullOrEmpty(Email))
+            {
+                throw new Exception("O e-mail é obrigatório.");
+            }
+            Regex rx = new Regex("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$");
+            if (String.IsNullOrEmpty(Email) || !rx.IsMatch(Email))
+            {
+                throw new Exception("Email inválido");
             }
 
             if (String.IsNullOrEmpty(Senha))
@@ -38,7 +49,14 @@ namespace Controllers
             string Senha
         )
         {
-            Usuario usuario = Usuario.GetUsuario(Id);
+            Usuario usuario;
+            try {
+                usuario = Usuario.GetUsuario(Id);
+            }
+            catch
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
 
             if (!String.IsNullOrEmpty(Nome))
             {
@@ -46,15 +64,19 @@ namespace Controllers
             }
             usuario.Nome = Nome;
 
+            Regex rx = new Regex("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$");
+            if (String.IsNullOrEmpty(Email) || !rx.IsMatch(Email))
+            {
+                throw new Exception("Email inválido");
+            }
             if (!String.IsNullOrEmpty(Email))
             {
                 usuario.Email = Email;
             }
             usuario.Email = Email;
 
-            if (!String.IsNullOrEmpty(Senha))
-            {
-                usuario.Senha = Senha;
+            if (Senha.Length < 8) {
+                throw new Exception("A senha deve ter no mínimo 8 caracteres.");
             }
             usuario.Senha = Senha;
 
@@ -67,15 +89,31 @@ namespace Controllers
             int Id
         )
         {
-            Usuario usuario = Usuario.GetUsuario(Id);
-            Models.Usuario.RemoverUsuario(usuario);
-
-            if (usuario == null)
+            try
+            {
+                Usuario usuario = Usuario.GetUsuario(Id);
+                Models.Usuario.RemoverUsuario(usuario);
+                return usuario;
+            }
+            catch
             {
                 throw new Exception("Usuário não encontrado.");
-            }
+            }            
+        }
 
-            return usuario;
+        public static IEnumerable<Usuario> GetUsuarios()
+        {
+            return Usuario.GetUsuarios();
+        }
+
+        public static void Auth(string Email, string Senha) {
+            try {
+                Usuario.Auth(Email, Senha);
+            }
+            catch
+            {
+                throw new Exception("Email ou senha inválido");
+            }
         }
 
     }
