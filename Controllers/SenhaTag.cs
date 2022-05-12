@@ -26,15 +26,20 @@ namespace Controllers
             return SenhaTag.GetSenhaTag(SenhaId, TagId);
         }
 
-        public static IEnumerable<SenhaTag> GetSenhaTags()  
-        {
-            return SenhaTag.GetSenhaTags();
-        }
 
         public static SenhaTag GetById(
             int Id
         )  
         {
+            try
+            {
+                 SenhaTag senhaTag = SenhaTag.GetById(Id);
+                SenhaTag.RemoverSenhaTag(senhaTag);
+            }
+            catch
+            {
+                throw new Exception("Não encontrado.");
+            }
             return SenhaTag.GetById(Id);
         }
 
@@ -55,7 +60,5 @@ namespace Controllers
                 );
             }
         }
-
-
     }
 }
