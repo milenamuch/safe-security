@@ -23,7 +23,7 @@ namespace Views.Lib {
                     this.ClientSize = new System.Drawing.Size(900, 900);
                     break;
                 case SizeScreen.Medium:
-                    this.ClientSize = new System.Drawing.Size(500, 500);
+                    this.ClientSize = new System.Drawing.Size(600, 600);
                     break;
                 default:
                     this.ClientSize = new System.Drawing.Size(300, 300);

@@ -71,26 +71,26 @@ A aplicação conta com 5 entidades:
 
 Para essa aplicação serão necessárias as seguintes tarefas:
 
-- [ ] Criar lib
-- [ ] Processo de Login
+- [x] Criar lib
+- [x] Processo de Login
     - [x] Criar controller de usuário
-    - [ ] Criar tela login
-    - [ ] Criar validação de login
+    - [x] Criar tela login
+    - [x] Criar validação de login
     - [x] Validação de email
-- [ ] Menu Principal
-- [ ] Lista de Categorias
+- [x] Menu Principal
+- [x] Lista de Categorias
 - [ ] Lista de Tags
 - [ ] Lista de Usuários
 - [ ] Lista de Senhas
-- [ ] Criar Categoria
+- [x] Criar Categoria
 - [ ] Criar Tag
 - [ ] Criar Usuário
 - [ ] Criar Senha
-- [ ] Alterar Categoria
+- [x] Alterar Categoria
 - [ ] Alterar Tag
 - [ ] Alterar Usuário
 - [ ] Alterar Senha
-- [ ] Excluir Categoria
+- [x] Excluir Categoria
 - [ ] Excluir Tag
 - [ ] Excluir Usuário
 - [ ] Excluir Senha
