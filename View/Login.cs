@@ -1,11 +1,5 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
 using Controllers;
 
@@ -20,8 +14,6 @@ namespace Views
 
         public Login() : base("Login",SizeScreen.Small)
         {
-        
-            
             fieldUsuario = new FieldForm("Usuário",60,80,180,20);
             fieldSenha = new FieldForm("Senha",60,140,180,60);
             fieldSenha.txtField.PasswordChar = '*';
