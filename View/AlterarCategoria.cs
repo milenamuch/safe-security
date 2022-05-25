@@ -1,4 +1,11 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System.Drawing;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 using Views.Lib;
 
 namespace Views
@@ -33,8 +40,8 @@ namespace Views
         }
         private void handleCancel(object sender, EventArgs e)
         {
+            this.Hide();
             (new Categorias()).Show();
         }
-    
     }
 }

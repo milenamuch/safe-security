@@ -1,6 +1,11 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 using Views.Lib;
 
 namespace Views
@@ -40,7 +45,8 @@ namespace Views
             this.Controls.Add(btnExcluir);
             this.Controls.Add(btnVoltar);
         }
-         private void handleCadastrarCategoria(object sender, EventArgs e)
+
+        private void handleCadastrarCategoria(object sender, EventArgs e)
         {
             this.Hide();
             (new CadastrarCategoria()).Show();
@@ -64,9 +70,11 @@ namespace Views
                 DialogResult resultConfirm = MessageBox.Show(messageConfirm, titleConfirm);    
             }
         }
+        
         private void handleVoltar(object sender, EventArgs e)
         {
             this.Hide();
+            (new Menu()).Show();
         }
     }
 }
