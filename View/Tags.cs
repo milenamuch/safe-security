@@ -1,6 +1,11 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 using Views.Lib;
 
 namespace Views
@@ -28,9 +33,9 @@ namespace Views
 			listView.AllowColumnReorder = true;
 			listView.Sorting = SortOrder.Ascending;
 
-            btnIncluir = new ButtonForm("Incluir", 20, 550, this.handleConfirm);
-            btnAlterar = new ButtonForm("Alterar",  170, 550, this.handleConfirm);
-            btnExcluir = new ButtonForm("Excluir",325, 550, this.handleConfirm);
+            btnIncluir = new ButtonForm("Incluir", 20, 550, this.handleCadastrarTag);
+            btnAlterar = new ButtonForm("Alterar",  170, 550, this.handleAlterarTag);
+            btnExcluir = new ButtonForm("Excluir",325, 550, this.handleExcluirTag);
             btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
 
             this.Controls.Add(listView);
@@ -39,21 +44,35 @@ namespace Views
             this.Controls.Add(btnExcluir);
             this.Controls.Add(btnVoltar);
         }
-        private void handleConfirm(object sender, EventArgs e)
+        private void handleCadastrarTag(object sender, EventArgs e)
         {
-            (new FormConfirmGeral()).Show();
+            this.Hide();
+            (new CadastrarTag()).Show();
+        }
+
+        private void handleAlterarTag(object sender, EventArgs e)
+        {
+            this.Hide();
+            (new AlterarTag()).Show();
+        }
+
+        private void handleExcluirTag(object sender, EventArgs e)
+        {
+            string message = "Tem certeza que quer excluir a tag X ?";  //Incluir Tag
+            string title = "Excluir tag";  
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
+            DialogResult result = MessageBox.Show(message, title, buttons);  
+            if (result == DialogResult.Yes) {  
+                string messageConfirm = "Tag excluída!";  
+                string titleConfirm = "";
+                DialogResult resultConfirm = MessageBox.Show(messageConfirm, titleConfirm);    
+            }
         }
 
         private void handleVoltar(object sender, EventArgs e)
         {
-            this.Hide();
-        }
-                public class FormConfirmGeral: Form
-        {
-            public FormConfirmGeral()
-            {
-      
-            }     
+           this.Hide();
+           (new Menu()).Show();
         }
     }
 }
