@@ -1,12 +1,12 @@
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace Views.Lib {
     public enum SizeScreen
     {
         Small,
         Medium,
-        Large
+        Large,
+        Long
     }
 
     public class BaseForm : Form
@@ -24,6 +24,9 @@ namespace Views.Lib {
                     break;
                 case SizeScreen.Medium:
                     this.ClientSize = new System.Drawing.Size(600, 600);
+                    break;
+                case SizeScreen.Long:
+                this.ClientSize = new System.Drawing.Size(300, 700);
                     break;
                 default:
                     this.ClientSize = new System.Drawing.Size(300, 300);
