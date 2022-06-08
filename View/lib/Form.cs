@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Views.Lib {
     public enum SizeScreen
