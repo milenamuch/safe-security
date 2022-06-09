@@ -1,12 +1,11 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
+using Controllers;
+using Models;
+using System.Collections.Generic;
+
 
 namespace Views
 {
@@ -39,11 +38,26 @@ namespace Views
             btnExcluir = new ButtonForm("Excluir",325, 550, this.handleExcluirCategoria);
             btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
 
+            this.LoadInfo();
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
             this.Controls.Add(btnAlterar);
             this.Controls.Add(btnExcluir);
             this.Controls.Add(btnVoltar);
+        }
+
+        public void LoadInfo() {
+            IEnumerable<Categoria> categorias = CategoriaController.GetCategorias();
+
+            this.listView.Items.Clear();
+            foreach (Categoria item in categorias)
+            {
+                ListViewItem lvItem = new ListViewItem(item.Id.ToString());
+                lvItem.SubItems.Add(item.Nome);
+                lvItem.SubItems.Add(item.Descricao);
+
+                this.listView.Items.Add(lvItem);
+            }
         }
 
         private void handleCadastrarCategoria(object sender, EventArgs e)
@@ -54,23 +68,45 @@ namespace Views
 
         private void handleAlterarCategoria(object sender, EventArgs e)
         {
-            this.Hide();
-            (new AlterarCategoria()).Show();
+
+            if (listView.SelectedItems.Count > 0) {
+                (new AlterarCategoria()).Show();
+                this.Hide();
+            } else {
+                MessageBox.Show("Selecione um item para alterar.");
+            }
         }
 
         private void handleExcluirCategoria(object sender, EventArgs e)
         {
-            string message = "Tem certeza que quer excluir a categoria X ?";  //Incluir Categoria
-            string title = "Excluir Categoria";  
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
-            DialogResult result = MessageBox.Show(message, title, buttons);  
-            if (result == DialogResult.Yes) {  
-                string messageConfirm = "Categoria excluída!";  
-                string titleConfirm = "";
-                DialogResult resultConfirm = MessageBox.Show(messageConfirm, titleConfirm);    
-            }
+            if (listView.SelectedItems.Count > 0) {
+                ListViewItem item = this.listView.SelectedItems[0];
+                int id = Convert.ToInt32(item.Text);
+                try {
+                CategoriaController.RemoverCategoria(
+                    id
+                );
+                    string message = "Tem certeza que quer excluir esta categoria?";  
+                    string title = "Excluir Categoria";  
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
+                    DialogResult result = MessageBox.Show(message, title, buttons);  
+                    if (result == DialogResult.Yes) {  
+                        string messageConfirm = "Categoria excluída!";  
+                        DialogResult resultConfirm = MessageBox.Show(messageConfirm);
+
+                        this.Hide();
+                        (new Categorias()).Show();
+                        this.LoadInfo();    
+                    }
+                   
+
+                } catch (Exception err) {
+                    MessageBox.Show(err.Message);
+                }
+             }else {
+                MessageBox.Show("Selecione uma categoria da lista para excluir.");
+            }        
         }
-        
         private void handleVoltar(object sender, EventArgs e)
         {
             this.Hide();
