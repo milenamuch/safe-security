@@ -1,13 +1,10 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
-
+using Controllers;
+using Models;
+using System.Collections.Generic;
 namespace Views
 {
     public class Tags : BaseForm
@@ -38,11 +35,24 @@ namespace Views
             btnExcluir = new ButtonForm("Excluir",325, 550, this.handleExcluirTag);
             btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
 
+            this.LoadInfo();
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
             this.Controls.Add(btnAlterar);
             this.Controls.Add(btnExcluir);
             this.Controls.Add(btnVoltar);
+        }
+
+        public void LoadInfo() {
+            IEnumerable<Tag> Tags = TagController.GetTags();
+
+            this.listView.Items.Clear();
+            foreach (Tag item in Tags)
+            {
+                ListViewItem lvItem = new ListViewItem(item.Id.ToString());
+                lvItem.SubItems.Add(item.Descricao);
+                this.listView.Items.Add(lvItem);
+            }
         }
         private void handleCadastrarTag(object sender, EventArgs e)
         {
