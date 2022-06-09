@@ -1,12 +1,7 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
+using Controllers;
 
 namespace Views
 {
@@ -36,7 +31,17 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            //Inserir Categoria
+            try {
+                CategoriaController.IncluirCategoria(
+                    this.fieldNome.txtField.Text,
+                    this.fieldDescricao.txtField.Text
+                );
+                (new Categorias()).Show();
+                (new Categorias()).LoadInfo();
+                this.Hide();
+            } catch (Exception err) {
+                MessageBox.Show(err.Message);
+            }
         }
         private void handleCancel(object sender, EventArgs e)
         {
