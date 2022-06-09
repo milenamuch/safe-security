@@ -1,5 +1,6 @@
 using System;
 using Views.Lib;
+using Controllers;
 
 namespace Views
 {
@@ -25,7 +26,16 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            //Inserir Tag
+             try {
+                TagController.IncluirTag(
+                    this.fieldDescricao.txtField.Text
+                );
+                (new Tags()).Show();
+                (new Tags()).LoadInfo();
+                this.Hide();
+            } catch (Exception err) {
+                //
+            }
         }
         private void handleCancel(object sender, EventArgs e)
         {
