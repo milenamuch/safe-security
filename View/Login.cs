@@ -16,7 +16,7 @@ namespace Views
         {
             fieldUsuario = new FieldForm("Usuário",60,80,180,20);
             fieldSenha = new FieldForm("Senha",60,140,180,60);
-            fieldSenha.txtField.PasswordChar = '*';
+            fieldSenha.txtField.PasswordChar = '⚹';
 
 			btnConfirmar = new ButtonForm("Confirmar", 100, 200, this.handleConfirm);
             btnCancelar = new ButtonForm("Cancelar", 100,250, this.handleCancel);
@@ -35,7 +35,7 @@ namespace Views
                     this.fieldUsuario.txtField.Text,
                     this.fieldSenha.txtField.Text
                 );
-                (new Menu()).Show();
+                new Menu().Show();
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
             }
