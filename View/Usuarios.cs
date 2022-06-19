@@ -10,7 +10,7 @@ namespace Views
 {
     public class Usuarios : BaseForm
     {
-        ListView listView;
+        public ListView listView;
 		ButtonForm btnIncluir;
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
@@ -62,26 +62,49 @@ namespace Views
         private void handleCadastrarUsuario(object sender, EventArgs e)
         {
             this.Hide();
-            (new CadastrarUsuario()).Show();
+            new CadastrarUsuario().Show();
         }
 
         private void handleAlterarUsuario(object sender, EventArgs e)
         {
+
+            if (listView.SelectedItems.Count > 0) {
+               new AlterarUsuario().Show();
+                this.Hide();
+            } else {
+                MessageBox.Show("Selecione um usuário da lista para alterar.");
+            }
             this.Hide();
-            (new AlterarUsuario()).Show();
+            
         }
 
         private void handleExcluirUsuario(object sender, EventArgs e)
         {
-            string message = "Tem certeza que quer excluir a Usuario X ?";  //Incluir Usuario
-            string title = "Excluir Usuario";  
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
-            DialogResult result = MessageBox.Show(message, title, buttons);  
-            if (result == DialogResult.Yes) {  
-                string messageConfirm = "Usuario excluída!";  
-                string titleConfirm = "";
-                DialogResult resultConfirm = MessageBox.Show(messageConfirm, titleConfirm);    
-            }
+            if (listView.SelectedItems.Count > 0) {
+                ListViewItem item = this.listView.SelectedItems[0];
+                int id = Convert.ToInt32(item.Text);
+                try {
+                UsuarioController.RemoverUsuario(
+                    id
+                );
+                    string message = "Tem certeza que quer excluir este usuário?";  
+                    string title = "Excluir Usuário";  
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
+                    DialogResult result = MessageBox.Show(message, title, buttons);  
+                    if (result == DialogResult.Yes) {  
+                        string messageConfirm = "Usuário excluído!";  
+                        DialogResult resultConfirm = MessageBox.Show(messageConfirm);
+
+                        this.LoadInfo();    
+                    }
+                   
+
+                } catch (Exception err) {
+                    MessageBox.Show(err.Message);
+                }
+                }else{
+                MessageBox.Show("Selecione uma tag da lista para excluir.");
+            }        
         }
         
         private void handleVoltar(object sender, EventArgs e)

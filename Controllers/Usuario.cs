@@ -29,7 +29,8 @@ namespace Controllers
             {
                 throw new Exception("Email inválido");
             }
-
+    
+            // buscar uma forma de validar que um email já cadastrado não poderá existir em outro cadastro
             if (Senha.Length < 8) {
                 throw new Exception("A senha deve ter no mínimo 8 caracteres.");
             }
