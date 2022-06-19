@@ -36,8 +36,7 @@ namespace Views
                     this.fieldNome.txtField.Text,
                     this.fieldDescricao.txtField.Text
                 );
-                (new Categorias()).Show();
-                (new Categorias()).LoadInfo();
+                new Categorias().LoadInfo();
                 this.Hide();
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
@@ -46,7 +45,7 @@ namespace Views
         private void handleCancel(object sender, EventArgs e)
         {
             this.Hide();
-            (new Categorias()).Show();
+            new Categorias().Show();
         }
     }
 }

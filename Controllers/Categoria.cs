@@ -39,14 +39,13 @@ namespace Controllers
             {
                 categoria.Descricao = Descricao;
             }
+            categoria.Descricao = Descricao;
 
-             if (categoria == null)
+            if (categoria == null)
             {
                 throw new Exception("Categoria não encontrada.");
             }
             
-            categoria.Descricao = Descricao;
-
             return categoria;
         }
 
