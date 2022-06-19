@@ -10,7 +10,7 @@ namespace Views
 {
     public class Usuarios : BaseForm
     {
-        ListView listView;
+        public ListView listView;
 		ButtonForm btnIncluir;
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
