@@ -1,11 +1,4 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
 
 namespace Views
@@ -36,36 +29,29 @@ namespace Views
         private void handleCategorias(object sender, EventArgs e)
         {
             this.Hide();
-            (new Categorias()).Show();
+            new Categorias().Show();
         }
 
         private void handleSenhas(object sender, EventArgs e)
         {
-            //(new Senhas()).Show();
+            new Senhas().Show();
         }
 
         private void handleTags(object sender, EventArgs e)
         {
             this.Hide();
-            (new Tags()).Show();
+            new Tags().Show();
         }
 
         private void handleUsuario(object sender, EventArgs e)
         {
             this.Hide();
-            (new Usuarios()).Show();
+            new Usuarios().Show();
         }
 
         private void handleSair(object sender, EventArgs e)
         {
             this.Hide();
-        }
-                public class FormConfirmGeral: Form
-        {
-            public FormConfirmGeral()
-            {
-      
-            }     
         }
     }
 }
