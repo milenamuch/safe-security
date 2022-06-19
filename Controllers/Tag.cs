@@ -33,12 +33,6 @@ namespace Controllers
             }
             tag.Descricao = Descricao;
 
-            if (!String.IsNullOrEmpty(Descricao))
-            {
-                tag.Descricao = Descricao;
-            }
-            tag.Descricao = Descricao;
-
             return tag;
         }
 

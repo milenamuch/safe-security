@@ -79,20 +79,20 @@ Para essa aplicação serão necessárias as seguintes tarefas:
     - [x] Validação de email
 - [x] Menu Principal
 - [x] Lista de Categorias
-- [ ] Lista de Tags
-- [ ] Lista de Usuários
-- [ ] Lista de Senhas
+- [x] Lista de Tags
+- [x] Lista de Usuários
+- [x] Lista de Senhas
 - [x] Criar Categoria
-- [ ] Criar Tag
-- [ ] Criar Usuário
+- [x] Criar Tag
+- [x] Criar Usuário
 - [ ] Criar Senha
 - [x] Alterar Categoria
 - [ ] Alterar Tag
 - [ ] Alterar Usuário
 - [ ] Alterar Senha
 - [x] Excluir Categoria
-- [ ] Excluir Tag
-- [ ] Excluir Usuário
+- [x] Excluir Tag
+- [x] Excluir Usuário
 - [ ] Excluir Senha
 - [ ] Criar Relação entre Senha e Tag
 - [ ] Excluir Relação entre Senha e Tag
