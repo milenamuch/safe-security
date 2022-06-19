@@ -18,7 +18,7 @@ namespace Views
             fieldNome = new FieldForm("Nome",30,30,240,20);
             fieldEmail = new FieldForm("Email",30,90,240,20);
             fieldSenha = new FieldForm("Senha",30,150,240,20);
-            fieldSenha.txtField.PasswordChar = '*';
+            fieldSenha.txtField.PasswordChar = '⚹';
 
 			btnConfirmar = new ButtonForm("Confirmar", 30, 230, this.handleConfirm);
             btnCancelar = new ButtonForm("Cancelar", 170,230, this.handleCancel);
@@ -42,8 +42,8 @@ namespace Views
                     this.fieldEmail.txtField.Text,
                     this.fieldSenha.txtField.Text
                 );
-                (new Categorias()).Show();
-                (new Categorias()).LoadInfo();
+                
+                new Usuarios().LoadInfo();
                 this.Hide();
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
@@ -52,7 +52,7 @@ namespace Views
         private void handleCancel(object sender, EventArgs e)
         {
             this.Hide();
-            (new Usuarios()).Show();
+            new Usuarios().Show();
         }
     }
 }
