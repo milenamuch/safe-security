@@ -26,21 +26,20 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-             try {
+            try {
                 TagController.IncluirTag(
                     this.fieldDescricao.txtField.Text
                 );
-                (new Tags()).Show();
-                (new Tags()).LoadInfo();
+                new Tags().LoadInfo();
                 this.Hide();
             } catch (Exception err) {
-                //
+                //MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
             this.Hide();
-            (new Tags()).Show();
+            new Tags().Show();
         }
     }
 }
