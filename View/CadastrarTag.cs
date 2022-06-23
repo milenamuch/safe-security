@@ -1,6 +1,7 @@
 using System;
 using Views.Lib;
 using Controllers;
+using System.Windows.Forms;
 
 namespace Views
 {
@@ -9,9 +10,12 @@ namespace Views
         FieldForm fieldDescricao;
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
+        Tags parent;
 
-        public CadastrarTag() : base("Cadastrar Tag",SizeScreen.Small)
+        public CadastrarTag(Tags parent) : base("Cadastrar Tag",SizeScreen.Small)
         {
+
+            this.parent = parent;
             fieldDescricao = new FieldForm("Descrição",30,80,240,20);
 
 			btnConfirmar = new ButtonForm("Confirmar", 30,210, this.handleConfirm);
@@ -26,20 +30,20 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            try {
+           try {
                 TagController.IncluirTag(
                     this.fieldDescricao.txtField.Text
                 );
-                new Tags().LoadInfo();
-                this.Hide();
+                this.parent.LoadInfo();
+                handleCancel(sender, e);
             } catch (Exception err) {
-                //MessageBox.Show(err.Message);
+                MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-            this.Hide();
-            new Tags().Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

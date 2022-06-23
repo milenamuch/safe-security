@@ -12,8 +12,12 @@ namespace Views
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
 
-        public CadastrarCategoria() : base("Cadastrar categoria",SizeScreen.Small)
+        Categorias parent;
+
+        public CadastrarCategoria(Categorias parent) : base("Cadastrar categoria",SizeScreen.Small)
         {
+            this.parent = parent;
+
             fieldNome = new FieldForm("Nome",30,50,240,20);
             fieldDescricao = new FieldForm("Descrição",30,120,240,20);  
 
@@ -36,16 +40,16 @@ namespace Views
                     this.fieldNome.txtField.Text,
                     this.fieldDescricao.txtField.Text
                 );
-                new Categorias().LoadInfo();
-                this.Hide();
+                this.parent.LoadInfo();
+                handleCancel(sender, e);
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-            this.Hide();
-            new Categorias().Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

@@ -15,10 +15,14 @@ namespace Views
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
+        Form parent;
         
-        public Senhas() : base("Senhas", SizeScreen.Medium)
+        public Senhas(Form parent) : base("Senhas", SizeScreen.Medium)
         {
-            
+
+            this.parent = parent;
+            this.parent.Hide();
+
             listView = new ListView();
 			listView.Location = new Point(20, 20);
 			listView.Size = new Size(560,510);
@@ -107,7 +111,8 @@ namespace Views
         private void handleVoltar(object sender, EventArgs e)
         {
            this.Hide();
-           (new Menu()).Show();
+           this.parent.Show();
         }
+           
     }
 }

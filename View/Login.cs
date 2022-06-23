@@ -35,7 +35,7 @@ namespace Views
                     this.fieldUsuario.txtField.Text,
                     this.fieldSenha.txtField.Text
                 );
-                new Menu().Show();
+                (new Menu(this)).Show();
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
             }
@@ -47,7 +47,7 @@ namespace Views
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
             DialogResult result = MessageBox.Show(message, title, buttons);  
             if (result == DialogResult.Yes) {  
-                this.Close();  
+                Application.Exit(); 
             }
         }
     }

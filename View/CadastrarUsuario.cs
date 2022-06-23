@@ -12,9 +12,12 @@ namespace Views
         FieldForm fieldSenha;
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
+        Usuarios parent;
 
-        public CadastrarUsuario() : base("Cadastrar Usuario",SizeScreen.Small)
+        public CadastrarUsuario(Usuarios parent) : base("Cadastrar Usuario",SizeScreen.Small)
         {
+            this.parent = parent;
+
             fieldNome = new FieldForm("Nome",30,30,240,20);
             fieldEmail = new FieldForm("Email",30,90,240,20);
             fieldSenha = new FieldForm("Senha",30,150,240,20);
@@ -43,16 +46,16 @@ namespace Views
                     this.fieldSenha.txtField.Text
                 );
                 
-                new Usuarios().LoadInfo();
-                this.Hide();
+                this.parent.LoadInfo();
+                handleCancel(sender, e);
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-            this.Hide();
-            new Usuarios().Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

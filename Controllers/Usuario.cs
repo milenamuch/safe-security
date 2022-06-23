@@ -106,6 +106,24 @@ namespace Controllers
             return Usuario.GetUsuarios();
         }
 
+       public static Usuario GetUsuario(
+            int Id
+        )
+        {
+            Usuario usuario = (
+                from Usuario in Usuario.GetUsuarios()
+                    where Usuario.Id == Id
+                    select Usuario
+            ).First();
+            
+            if (usuario == null)
+            {
+                throw new Exception("Usuario não encontrado.");
+            }
+
+            return usuario;
+        }
+
         public static void Auth(string Email, string Senha) {
             try {
                 Usuario.Auth(Email, Senha);

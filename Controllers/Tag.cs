@@ -31,8 +31,14 @@ namespace Controllers
             {
                 tag.Descricao = Descricao;
             }
+
+            if (tag == null)
+            {
+                throw new Exception("Tag não encontrada.");
+            }
             tag.Descricao = Descricao;
 
+            Models.Tag.AlterarTag(Id, Descricao);
             return tag;
         }
 
@@ -45,7 +51,7 @@ namespace Controllers
             return tag;
         }
 
-         public static Tag GetTag(int Id)
+        public static Tag GetTag(int Id)
         {
             Tag tag = Tag.GetTag(Id);
 
