@@ -4,12 +4,12 @@ using System.Drawing;
 
 namespace Views.Lib
 {
-    public class FielsRich : Form
+    public class FieldsRich : Form
     {
         public RichTextBox txtField;
         public Label lblField;
 
-        public FielsRich(
+        public FieldsRich(
             string Titulo,
             int X,
             int Y,
