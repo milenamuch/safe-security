@@ -23,9 +23,12 @@ namespace Views
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
 
-        public AlterarSenha() : base("Alterar Senha",SizeScreen.Long)
+        Senhas parent;
+
+        public AlterarSenha(Senhas parent) : base("Alterar Senha",SizeScreen.Long)
         {
-      
+            this.parent = parent;
+            this.parent.Hide();
 
             fieldNome = new FieldForm("Nome",30,30,240,20);
             fieldCategoria = new FieldForm("Categoria",30,90,260,60);
@@ -79,39 +82,51 @@ namespace Views
         private void handleConfirm(object sender, EventArgs e)
         {
             try {
+                if (checkedList.CheckedItems.Count == 0) 
+                {
+                    MessageBox.Show("Selecione um item da lista");
+                    return;
+                }
+
                 string comboBoxValue = this.comboBox.Text; 
                 string[] destructComboBoxValue = comboBoxValue.Split('-'); 
                 string idCategoria = destructComboBoxValue[0].Trim(); 
-                SenhaController.IncluirSenha(
+                ListViewItem item = this.parent.listView.SelectedItems[0];
+                int id = Convert.ToInt32(item.Text);
+                SenhaController.AlterarSenha(
+                    id,
                     this.fieldNome.txtField.Text,
                     Convert.ToInt32(idCategoria),
                     this.fieldUrl.txtField.Text,
                     this.fieldUsuario.txtField.Text,
                     this.fieldSenha.txtField.Text,
                     this.fieldProcedimento.txtField.Text
+                    //TAG??
                 );
-                if (checkedList.SelectedItems.Count > 0) {
-                    foreach (var item in checkedList.SelectedItems)
-                    {
-                        //SenhaTagController.InserirSenhaTag(0, item.ToString());
+                
+                IEnumerable<Tag> tags = TagController.GetTags();
+                foreach (Tag tag in tags)
+                {
+                    SenhaTag senhaTag = SenhaTagController.GetSenhaTag(id, tag.Id);
+                    bool checkedSenhaTag = checkedList.CheckedItems.Contains(tag.ToString());
+                    if (checkedSenhaTag && senhaTag == null) {
+                        SenhaTagController.InserirSenhaTag(id, tag.Id);
                     }
-                    //this.Hide();
-
-                } else {
-                    MessageBox.Show("Selecione ao menos uma tag da lista");
+                    if (!checkedSenhaTag && senhaTag != null) {
+                        SenhaTagController.ExcluirSenhaTag(senhaTag.Id);
+                    }
                 }
 
+                this.parent.LoadInfo();
+                this.parent.Show();
                 this.Close();
-                new Senhas().LoadInfo();
-               
-                
             } catch (Exception err) {
                 MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-                new Senhas().Show();
+                 this.parent.Show();
                 this.Close();
         }
     }

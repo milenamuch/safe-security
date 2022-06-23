@@ -67,18 +67,13 @@ namespace Views
        private void handleCadastrarSenha(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarSenha().Show();
+            new CadastrarSenha(this).Show();
         }
 
         private void handleAlterarSenha(object sender, EventArgs e)
         {
-            /*this.Hide();
-            if (listView.SelectedItems.Count > 0) {
-                (new AlterarSenha()).Show();
-                this.Hide();
-            } else {
-                MessageBox.Show("Selecione um item da lista para alterar.");
-            }*/
+            this.Hide();
+            new AlterarSenha(this).Show();
         }
 
         private void handleExcluirSenha(object sender, EventArgs e)
