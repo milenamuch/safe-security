@@ -23,10 +23,13 @@ namespace Views
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
 
-        public CadastrarSenha() : base("Cadastrar Senha",SizeScreen.Long)
+        Senhas parent;
+
+        public CadastrarSenha(Senhas parent) : base("Cadastrar Senha",SizeScreen.Long)
         {
       
-
+            this.parent = parent;
+            this.parent.Hide();
             fieldNome = new FieldForm("Nome",30,30,240,20);
             fieldCategoria = new FieldForm("Categoria",30,90,260,60);
             fieldUrl = new FieldForm("Url",30,150,240,20);
@@ -81,8 +84,8 @@ namespace Views
             try {
                 string comboBoxValue = this.comboBox.Text; 
                 string[] destructComboBoxValue = comboBoxValue.Split('-'); 
-                string idCategoria = destructComboBoxValue[0].Trim(); 
-                SenhaController.IncluirSenha(
+                string idCategoria = destructComboBoxValue[0].Trim();
+                Senha senha = SenhaController.IncluirSenha(
                     this.fieldNome.txtField.Text,
                     Convert.ToInt32(idCategoria),
                     this.fieldUrl.txtField.Text,
@@ -90,28 +93,31 @@ namespace Views
                     this.fieldSenha.txtField.Text,
                     this.fieldProcedimento.txtField.Text
                 );
-                if (checkedList.SelectedItems.Count > 0) {
-                    foreach (var item in checkedList.SelectedItems)
+                if (checkedList.CheckedItems.Count > 0) 
+                {
+                    foreach (object itemList in checkedList.CheckedItems)
                     {
-                        //SenhaTagController.InserirSenhaTag(0, item.ToString());
+                        string checkedValue = itemList.ToString(); 
+                        string[] destructCheckedValue = checkedValue.Split('-'); 
+                        string idTagString = destructCheckedValue[0].Trim(); 
+                        int idTag = Convert.ToInt32(idTagString);
+                        SenhaTagController.InserirSenhaTag(senha.Id, idTag);
                     }
                     //this.Hide();
-
                 } else {
-                    MessageBox.Show("Selecione ao menos uma tag da lista");
+                    MessageBox.Show("Selecione um item da lista");
                 }
-
+                this.parent.LoadInfo();
+                this.parent.Show();
                 this.Close();
-                new Senhas().LoadInfo();
-               
-                
-            } catch (Exception err) {
+            } catch (Exception err) 
+            {
                 MessageBox.Show(err.Message);
             }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-                new Senhas().Show();
+                this.parent.Show();
                 this.Close();
         }
     }
