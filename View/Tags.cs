@@ -14,10 +14,12 @@ namespace Views
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
+        Form parent;
         
-        public Tags() : base("Tags", SizeScreen.Medium)
+        public Tags(Form parent) : base("Tags", SizeScreen.Medium)
         {
-            
+            this.parent = parent;
+            this.parent.Hide();
             listView = new ListView();
 			listView.Location = new Point(20, 20);
 			listView.Size = new Size(560,510);
@@ -57,17 +59,16 @@ namespace Views
         private void handleCadastrarTag(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarTag().Show();
+            new CadastrarTag(this).Show();
         }
 
         private void handleAlterarTag(object sender, EventArgs e)
         {
-            this.Hide();
             if (listView.SelectedItems.Count > 0) {
-                (new AlterarTag()).Show();
                 this.Hide();
+                new AlterarTag(this).Show();
             } else {
-                MessageBox.Show("Selecione um item da lista para alterar.");
+                MessageBox.Show("Selecione um item para alterar.");
             }
         }
 
@@ -100,8 +101,8 @@ namespace Views
 
         private void handleVoltar(object sender, EventArgs e)
         {
-           this.Hide();
-           (new Menu()).Show();
+           this.Close();
+           this.parent.Show();
         }
     }
 }

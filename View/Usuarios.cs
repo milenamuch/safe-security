@@ -15,9 +15,12 @@ namespace Views
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
+        Form parent;
         
-        public Usuarios() : base("Usuarios", SizeScreen.Medium)
+        public Usuarios(Form parent) : base("Usuarios", SizeScreen.Medium)
         {
+            this.parent = parent;
+            this.parent.Hide();
             
             listView = new ListView();
 			listView.Location = new Point(20, 20);
@@ -48,6 +51,7 @@ namespace Views
             IEnumerable<Usuario> usuarios = UsuarioController.GetUsuarios();
 
             this.listView.Items.Clear();
+            this.Show();
             foreach (Usuario item in usuarios)
             {
                 ListViewItem lvItem = new ListViewItem(item.Id.ToString());
@@ -62,20 +66,18 @@ namespace Views
         private void handleCadastrarUsuario(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarUsuario().Show();
+            new CadastrarUsuario(this).Show();
         }
 
         private void handleAlterarUsuario(object sender, EventArgs e)
         {
-
             if (listView.SelectedItems.Count > 0) {
-               new AlterarUsuario().Show();
                 this.Hide();
+                new AlterarUsuario(this).Show();
+                
             } else {
                 MessageBox.Show("Selecione um usuário da lista para alterar.");
             }
-            this.Hide();
-            
         }
 
         private void handleExcluirUsuario(object sender, EventArgs e)
@@ -94,7 +96,6 @@ namespace Views
                     if (result == DialogResult.Yes) {  
                         string messageConfirm = "Usuário excluído!";  
                         DialogResult resultConfirm = MessageBox.Show(messageConfirm);
-
                         this.LoadInfo();    
                     }
                    
@@ -109,8 +110,8 @@ namespace Views
         
         private void handleVoltar(object sender, EventArgs e)
         {
-            this.Hide();
-            (new Menu()).Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

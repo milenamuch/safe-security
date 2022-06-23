@@ -1,5 +1,6 @@
 using System;
 using Views.Lib;
+using System.Windows.Forms;
 
 namespace Views
 {
@@ -11,8 +12,12 @@ namespace Views
         ButtonForm btnUsusario;
         ButtonForm btnSair;
 
-        public Menu() : base("Menu", SizeScreen.Small)
+        Form parent;
+        
+        public Menu(Form parent) : base("Menu", SizeScreen.Small)
         {
+            this.parent = parent;
+            this.parent.Hide();
             btnCategorias = new ButtonForm("Categorias", 100, 30, this.handleCategorias);
             btnSenhas = new ButtonForm("Senhas", 100, 80, this.handleSenhas);
             btnTags = new ButtonForm("Tags", 100, 130, this.handleTags);
@@ -29,29 +34,27 @@ namespace Views
         private void handleCategorias(object sender, EventArgs e)
         {
             this.Hide();
-            new Categorias().Show();
+            (new Categorias(this)).Show();
         }
 
         private void handleSenhas(object sender, EventArgs e)
         {
-            new Senhas().Show();
+            (new Senhas(this)).Show();
         }
 
         private void handleTags(object sender, EventArgs e)
         {
-            this.Hide();
-            new Tags().Show();
+            (new Tags(this)).Show();
         }
 
         private void handleUsuario(object sender, EventArgs e)
         {
-            this.Hide();
-            new Usuarios().Show();
+            (new Usuarios(this)).Show();
         }
 
         private void handleSair(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

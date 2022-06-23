@@ -112,6 +112,15 @@ namespace Controllers
             senha.SenhaEncrypt = SenhaEncrypt;
             senha.Procedimento = Procedimento;
 
+            Models.Senha.AlterarSenha(
+            Id,
+            Nome,
+            CategoriaId,
+            Url,
+            Usuario,
+            SenhaEncrypt,
+            Procedimento);
+
             return senha;
         }
 

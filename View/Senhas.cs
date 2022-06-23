@@ -12,10 +12,14 @@ namespace Views
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
+        Form parent;
         
-        public Senhas() : base("Senhas", SizeScreen.Medium)
+        public Senhas(Form parent) : base("Senhas", SizeScreen.Medium)
         {
-            
+
+            this.parent = parent;
+            this.parent.Hide();
+
             listView = new ListView();
 			listView.Location = new Point(20, 20);
 			listView.Size = new Size(560,510);
@@ -43,19 +47,14 @@ namespace Views
         }
         private void handleConfirm(object sender, EventArgs e)
         {
-            (new FormConfirmGeral()).Show();
+            //(new FormConfirmGeral()).Show();
         }
 
         private void handleVoltar(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
+            this.parent.Show();
         }
-                public class FormConfirmGeral: Form
-        {
-            public FormConfirmGeral()
-            {
-      
-            }     
-        }
+           
     }
 }

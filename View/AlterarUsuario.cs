@@ -1,12 +1,9 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading;
 using Views.Lib;
+using Controllers;
+using Models;
+
 
 namespace Views
 {
@@ -17,13 +14,27 @@ namespace Views
         FieldForm fieldSenha;
 		ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
+        Usuarios parent;
+        ListViewItem selectedItem;
+        int id = 0;
 
-        public AlterarUsuario() : base("Alterar Usuario",SizeScreen.Small)
+        public AlterarUsuario(Usuarios parent) : base("Alterar Usuario",SizeScreen.Small)
         {
+
+            this.parent = parent;
+            this.selectedItem = this.parent.listView.SelectedItems[0];
+            this.id = Convert.ToInt32(this.selectedItem.Text);
+
+            Usuario usuario = UsuarioController.GetUsuario(id);
+
             fieldNome = new FieldForm("Nome",30,30,240,20);
             fieldEmail = new FieldForm("Email",30,90,240,20);
             fieldSenha = new FieldForm("Senha",30,150,240,20);
             fieldSenha.txtField.PasswordChar = '*';
+
+            this.fieldNome.txtField.Text = usuario.Nome;
+            this.fieldEmail.txtField.Text = usuario.Email;
+            this.fieldSenha.txtField.Text = usuario.Senha;
 
 			btnConfirmar = new ButtonForm("Confirmar", 30, 230, this.handleConfirm);
             btnCancelar = new ButtonForm("Cancelar", 170,230, this.handleCancel);
@@ -41,12 +52,23 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            //Inserir Usuario
+            try{
+                UsuarioController.AlterarUsuario(
+                    this.id,
+                    this.fieldNome.txtField.Text,
+                    this.fieldEmail.txtField.Text,
+                    this.fieldSenha.txtField.Text
+                );
+                this.parent.LoadInfo();
+                handleCancel(sender, e);
+            } catch (Exception err) {
+                MessageBox.Show(err.Message);
+            }
         }
         private void handleCancel(object sender, EventArgs e)
         {
-            this.Hide();
-            (new Usuarios()).Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

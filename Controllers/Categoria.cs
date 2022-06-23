@@ -46,6 +46,7 @@ namespace Controllers
                 throw new Exception("Categoria não encontrada.");
             }
             
+            Models.Categoria.AlterarCategoria(Id,Nome, Descricao);
             return categoria;
         }
 

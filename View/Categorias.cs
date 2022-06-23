@@ -16,10 +16,11 @@ namespace Views
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
-        
-        public Categorias() : base("Categorias", SizeScreen.Medium)
+        Form parent;
+        public Categorias(Form parent) : base("Categorias", SizeScreen.Medium)
         {
-            
+            this.parent = parent;
+            this.parent.Hide();
             listViewCategorias = new ListView();
 			listViewCategorias.Location = new Point(20, 20);
 			listViewCategorias.Size = new Size(560,510);
@@ -64,15 +65,15 @@ namespace Views
         private void handleCadastrarCategoria(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarCategoria().Show();
+            new CadastrarCategoria(this).Show();
         }
 
         private void handleAlterarCategoria(object sender, EventArgs e)
         {
             
             if (listViewCategorias.SelectedItems.Count > 0) {
-                new AlterarCategoria().Show();
                 this.Hide();
+                new AlterarCategoria(this).Show();
             } else {
                 MessageBox.Show("Selecione um item para alterar.");
             }
@@ -108,8 +109,8 @@ namespace Views
         }
         private void handleVoltar(object sender, EventArgs e)
         {
-            this.Hide();
-            (new Menu()).Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }
