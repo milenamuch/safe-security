@@ -34,7 +34,7 @@ namespace Views
 
             this.fieldNome.txtField.Text = usuario.Nome;
             this.fieldEmail.txtField.Text = usuario.Email;
-            this.fieldSenha.txtField.Text = usuario.Senha;
+            
 
 			btnConfirmar = new ButtonForm("Confirmar", 30, 230, this.handleConfirm);
             btnCancelar = new ButtonForm("Cancelar", 170,230, this.handleCancel);
