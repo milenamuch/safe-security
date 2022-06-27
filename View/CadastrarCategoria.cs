@@ -9,20 +9,20 @@ namespace Views
     {
         FieldForm fieldNome;
         FieldForm fieldDescricao;
-		ButtonForm btnConfirmar;
+        ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
 
         Categorias parent;
 
-        public CadastrarCategoria(Categorias parent) : base("Cadastrar categoria",SizeScreen.Small)
+        public CadastrarCategoria(Categorias parent) : base("Cadastrar categoria", SizeScreen.Small)
         {
             this.parent = parent;
 
-            fieldNome = new FieldForm("Nome",30,50,240,20);
-            fieldDescricao = new FieldForm("Descrição",30,120,240,20);  
+            fieldNome = new FieldForm("Nome", 30, 50, 240, 20);
+            fieldDescricao = new FieldForm("Descrição", 30, 120, 240, 20);
 
-			btnConfirmar = new ButtonForm("Confirmar", 30, 210, this.handleConfirm);
-            btnCancelar = new ButtonForm("Cancelar", 170,210, this.handleCancel);
+            btnConfirmar = new ButtonForm("Confirmar", 30, 210, this.handleConfirm);
+            btnCancelar = new ButtonForm("Cancelar", 170, 210, this.handleCancel);
 
             this.Controls.Add(fieldNome.lblField);
             this.Controls.Add(fieldNome.txtField);
@@ -35,14 +35,17 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 CategoriaController.IncluirCategoria(
                     this.fieldNome.txtField.Text,
                     this.fieldDescricao.txtField.Text
                 );
                 this.parent.LoadInfo();
                 handleCancel(sender, e);
-            } catch (Exception err) {
+            }
+            catch (Exception err)
+            {
                 MessageBox.Show(err.Message);
             }
         }
