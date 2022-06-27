@@ -17,7 +17,7 @@ namespace Views
         ButtonForm btnVoltar;
         Form parent;
         
-        public Usuarios(Form parent) : base("Usuarios", SizeScreen.Medium)
+        public Usuarios(Form parent) : base("Usuários", SizeScreen.Medium)
         {
             this.parent = parent;
             this.parent.Hide();
@@ -66,14 +66,14 @@ namespace Views
         private void handleCadastrarUsuario(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarUsuario(this).Show();
+            (new CadastrarUsuario(this)).Show();
         }
 
         private void handleAlterarUsuario(object sender, EventArgs e)
         {
             if (listView.SelectedItems.Count > 0) {
                 this.Hide();
-                new AlterarUsuario(this).Show();
+                (new AlterarUsuario(this)).Show();
                 
             } else {
                 MessageBox.Show("Selecione um usuário da lista para alterar.");
