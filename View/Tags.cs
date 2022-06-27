@@ -68,7 +68,7 @@ namespace Views
             if (listView.SelectedItems.Count > 0)
             {
                 this.Hide();
-                new AlterarTag(this).Show();
+                (new AlterarTag(this)).Show();
             }
             else
             {
