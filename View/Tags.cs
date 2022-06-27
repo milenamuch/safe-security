@@ -10,31 +10,31 @@ namespace Views
     public class Tags : BaseForm
     {
         public ListView listView;
-		ButtonForm btnIncluir;
+        ButtonForm btnIncluir;
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
         Form parent;
-        
+
         public Tags(Form parent) : base("Tags", SizeScreen.Medium)
         {
             this.parent = parent;
             this.parent.Hide();
             listView = new ListView();
-			listView.Location = new Point(20, 20);
-			listView.Size = new Size(560,510);
-			listView.View = View.Details;
-			listView.Columns.Add("ID", 60, HorizontalAlignment.Center);
+            listView.Location = new Point(20, 20);
+            listView.Size = new Size(560, 510);
+            listView.View = View.Details;
+            listView.Columns.Add("ID", 60, HorizontalAlignment.Center);
             listView.Columns.Add("Descrição", 500, HorizontalAlignment.Center);
-			listView.FullRowSelect = true;
-			listView.GridLines = true;
-			listView.AllowColumnReorder = true;
-			listView.Sorting = SortOrder.Ascending;           
+            listView.FullRowSelect = true;
+            listView.GridLines = true;
+            listView.AllowColumnReorder = true;
+            listView.Sorting = SortOrder.Ascending;
 
             btnIncluir = new ButtonForm("Incluir", 20, 550, this.handleCadastrarTag);
-            btnAlterar = new ButtonForm("Alterar",  170, 550, this.handleAlterarTag);
-            btnExcluir = new ButtonForm("Excluir",325, 550, this.handleExcluirTag);
-            btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
+            btnAlterar = new ButtonForm("Alterar", 170, 550, this.handleAlterarTag);
+            btnExcluir = new ButtonForm("Excluir", 325, 550, this.handleExcluirTag);
+            btnVoltar = new ButtonForm("Voltar", 480, 550, this.handleVoltar);
 
             this.LoadInfo();
             this.Controls.Add(listView);
@@ -44,10 +44,10 @@ namespace Views
             this.Controls.Add(btnVoltar);
         }
 
-        public void LoadInfo() {
+        public void LoadInfo()
+        {
             IEnumerable<Tag> Tags = TagController.GetTags();
 
-            this.Show();
             this.listView.Items.Clear();
             foreach (Tag item in Tags)
             {
@@ -59,50 +59,60 @@ namespace Views
         private void handleCadastrarTag(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarTag(this).Show();
+            (new CadastrarTag(this)).Show();
         }
 
         private void handleAlterarTag(object sender, EventArgs e)
         {
-            if (listView.SelectedItems.Count > 0) {
+            if (listView.SelectedItems.Count > 0)
+            {
                 this.Hide();
-                new AlterarTag(this).Show();
-            } else {
+                (new AlterarTag(this)).Show();
+            }
+            else
+            {
                 MessageBox.Show("Selecione um item para alterar.");
             }
         }
 
         private void handleExcluirTag(object sender, EventArgs e)
         {
-            if (listView.SelectedItems.Count > 0) {
+            if (listView.SelectedItems.Count > 0)
+            {
                 ListViewItem item = this.listView.SelectedItems[0];
                 int id = Convert.ToInt32(item.Text);
-                try {
-                TagController.RemoverTag(
-                    id
-                );
-                    string message = "Tem certeza que quer excluir esta tag?";  
-                    string title = "Excluir Tag";  
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
-                    DialogResult result = MessageBox.Show(message, title, buttons);  
-                    if (result == DialogResult.Yes) {  
-                        string messageConfirm = "Tag excluída!";  
+                try
+                {
+                    TagController.RemoverTag(
+                        id
+                    );
+                    string message = "Tem certeza que quer excluir esta tag?";
+                    string title = "Excluir Tag";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show(message, title, buttons);
+                    if (result == DialogResult.Yes)
+                    {
+                        string messageConfirm = "Tag excluída!";
                         DialogResult resultConfirm = MessageBox.Show(messageConfirm);
 
-                        this.LoadInfo();    
+                        this.LoadInfo();
                     }
-                } catch (Exception err) {
+                }
+                catch (Exception err)
+                {
                     MessageBox.Show(err.Message);
                 }
-                }else{
+            }
+            else
+            {
                 MessageBox.Show("Selecione uma tag da lista para excluir.");
-            }        
+            }
         }
 
         private void handleVoltar(object sender, EventArgs e)
         {
-           this.Close();
-           this.parent.Show();
+            this.Close();
+            this.parent.Show();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Views
                 TagController.IncluirTag(
                     this.fieldDescricao.txtField.Text
                 );
+                this.parent.Show();
                 this.parent.LoadInfo();
                 handleCancel(sender, e);
             } catch (Exception err) {
