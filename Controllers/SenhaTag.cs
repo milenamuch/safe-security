@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Models;
 
 namespace Controllers
@@ -7,16 +7,15 @@ namespace Controllers
     public class SenhaTagController
     {
         public static SenhaTag InserirSenhaTag(
-            int TagId,
-            int SenhaId
+            int SenhaId,
+            int TagId
         )
         {
-            TagController.GetTag(TagId);
             SenhaController.GetSenha(SenhaId);
+            TagController.GetTag(TagId);
 
-            return new SenhaTag(TagId, SenhaId);
+            return new SenhaTag(SenhaId, TagId);
         }
-
         public static SenhaTag GetSenhaTag(
             int SenhaId,
             int TagId
@@ -25,20 +24,15 @@ namespace Controllers
             return SenhaTag.GetSenhaTag(SenhaId, TagId);
         }
 
+        public static IEnumerable<SenhaTag> GetSenhaTags()
+        {
+            return SenhaTag.GetSenhaTags();
+        }
 
         public static SenhaTag GetById(
             int Id
-        )  
+        )
         {
-            try
-            {
-                 SenhaTag senhaTag = SenhaTag.GetById(Id);
-                SenhaTag.RemoverSenhaTag(senhaTag);
-            }
-            catch
-            {
-                throw new Exception("Não encontrado.");
-            }
             return SenhaTag.GetById(Id);
         }
 
@@ -59,5 +53,6 @@ namespace Controllers
                 );
             }
         }
+
     }
 }
