@@ -11,12 +11,12 @@ namespace Views
     public class Senhas : BaseForm
     {
         public ListView listView;
-		ButtonForm btnIncluir;
+        ButtonForm btnIncluir;
         ButtonForm btnAlterar;
         ButtonForm btnExcluir;
         ButtonForm btnVoltar;
         Form parent;
-        
+
         public Senhas(Form parent) : base("Senhas", SizeScreen.Medium)
         {
 
@@ -24,23 +24,23 @@ namespace Views
             this.parent.Hide();
 
             listView = new ListView();
-			listView.Location = new Point(20, 20);
-			listView.Size = new Size(560,510);
-			listView.View = View.Details;
+            listView.Location = new Point(20, 20);
+            listView.Size = new Size(560, 510);
+            listView.View = View.Details;
 
-			listView.Columns.Add("ID", 40, HorizontalAlignment.Center);
-    		listView.Columns.Add("Nome", 120, HorizontalAlignment.Center);
+            listView.Columns.Add("ID", 40, HorizontalAlignment.Center);
+            listView.Columns.Add("Nome", 120, HorizontalAlignment.Center);
             listView.Columns.Add("Categoria", 100, HorizontalAlignment.Center);
             listView.Columns.Add("Url", 300, HorizontalAlignment.Center);
-			listView.FullRowSelect = true;
-			listView.GridLines = true;
-			listView.AllowColumnReorder = true;
-			listView.Sorting = SortOrder.Ascending;
+            listView.FullRowSelect = true;
+            listView.GridLines = true;
+            listView.AllowColumnReorder = true;
+            listView.Sorting = SortOrder.Ascending;
 
             btnIncluir = new ButtonForm("Incluir", 20, 550, this.handleCadastrarSenha);
-            btnAlterar = new ButtonForm("Alterar",  170, 550, this.handleAlterarSenha);
-            btnExcluir = new ButtonForm("Excluir",325, 550, this.handleExcluirSenha);
-            btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
+            btnAlterar = new ButtonForm("Alterar", 170, 550, this.handleAlterarSenha);
+            btnExcluir = new ButtonForm("Excluir", 325, 550, this.handleExcluirSenha);
+            btnVoltar = new ButtonForm("Voltar", 480, 550, this.handleVoltar);
 
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
@@ -49,7 +49,8 @@ namespace Views
             this.Controls.Add(btnVoltar);
         }
 
-        public void LoadInfo() {
+        public void LoadInfo()
+        {
             IEnumerable<Senha> senhas = SenhaController.GetSenhas();
 
             this.listView.Items.Clear();
@@ -64,50 +65,73 @@ namespace Views
             }
         }
 
-       private void handleCadastrarSenha(object sender, EventArgs e)
+        private void handleCadastrarSenha(object sender, EventArgs e)
         {
             this.Hide();
-            new CadastrarSenha(this).Show();
+            (new CadastrarSenha(this)).Show();
         }
 
         private void handleAlterarSenha(object sender, EventArgs e)
         {
-            this.Hide();
-            new AlterarSenha(this).Show();
+
+            if (listView.SelectedItems.Count > 0)
+            {
+                ListViewItem item = this.listView.SelectedItems[0];
+                int id = Convert.ToInt32(item.Text);
+                try
+                {
+                    this.Hide();
+                    (new AlterarSenha(this)).Show();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma senha da lista para alterar.");
+            }
         }
 
         private void handleExcluirSenha(object sender, EventArgs e)
         {
-            if (listView.SelectedItems.Count > 0) {
+            if (listView.SelectedItems.Count > 0)
+            {
                 ListViewItem item = this.listView.SelectedItems[0];
                 int id = Convert.ToInt32(item.Text);
-                try {
-                SenhaController.RemoverSenha(
-                    id
-                );
-                    string message = "Tem certeza que quer excluir esta senha?";  
-                    string title = "Excluir Senha";  
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;  
-                    DialogResult result = MessageBox.Show(message, title, buttons);  
-                    if (result == DialogResult.Yes) {  
-                        string messageConfirm = "Senha excluída!";  
+                try
+                {
+                    SenhaController.RemoverSenha(
+                        id
+                    );
+                    string message = "Tem certeza que quer excluir esta senha?";
+                    string title = "Excluir Senha";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show(message, title, buttons);
+                    if (result == DialogResult.Yes)
+                    {
+                        string messageConfirm = "Senha excluída!";
                         DialogResult resultConfirm = MessageBox.Show(messageConfirm);
 
-                        this.LoadInfo();    
+                        this.LoadInfo();
                     }
-                } catch (Exception err) {
+                }
+                catch (Exception err)
+                {
                     MessageBox.Show(err.Message);
                 }
-                }else{
+            }
+            else
+            {
                 MessageBox.Show("Selecione uma senha da lista para excluir.");
-            }        
+            }
         }
 
         private void handleVoltar(object sender, EventArgs e)
         {
-           this.Hide();
-           this.parent.Show();
+            this.Hide();
+            this.parent.Show();
         }
-           
     }
 }
