@@ -14,16 +14,17 @@ namespace Views.Lib
             switch (W)
             {
                 case SizeScreen.Large:
-                    this.Size = new Size(900, 30);
+                    this.Size = new Size(900, 40);
                     break;
                 case SizeScreen.Medium:
-                    this.Size = new Size(500, 30);
+                    this.Size = new Size(500, 40);
                     break;
                 default:
-                    this.Size = new Size(300, 30);
+                    this.Size = new Size(300, 40);
+                    
                     break;
             }
-            this.BackColor = Color.LightBlue;
+            this.BackColor = Color.PaleTurquoise;
             this.Location = new Point(0, 0);
             this.Font = new Font(FontFamily.GenericSansSerif, 12.0F, FontStyle.Bold);
 
