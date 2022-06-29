@@ -51,8 +51,8 @@ namespace Controllers
         {
             Tag tag = (
                 from Tag in Tag.GetTags()
-                    where Tag.Id == Id
-                    select Tag
+                where Tag.Id == Id
+                select Tag
             ).First();
 
             if (tag == null)
