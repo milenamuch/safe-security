@@ -22,8 +22,8 @@ namespace Views
             this.parent = parent;
             this.parent.Hide();
 
-            tags = new Title ("Tags", SizeScreen.Medium);
-            tags.Padding = new Padding (20,10,0,0);
+            tags = new Title("Tags", SizeScreen.Medium);
+            tags.Padding = new Padding(20, 10, 0, 0);
 
             listView = new ListView();
             listView.Location = new Point(20, 50);
