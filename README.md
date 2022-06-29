@@ -93,16 +93,16 @@ Para essa aplicação serão necessárias as seguintes tarefas:
 - [x] Excluir Categoria
 - [x] Excluir Tag
 - [x] Excluir Usuário
-- [ ] Excluir Senha
-- [ ] Criar Relação entre Senha e Tag
-- [ ] Excluir Relação entre Senha e Tag
+- [x] Excluir Senha
+- [x] Criar Relação entre Senha e Tag
+- [x] Excluir Relação entre Senha e Tag
 
 ### Diferenciais
 
 Serão considerados diferenciais se assim existirem:
 - Exportador de Senhas: Gerar um relatório em CSV, TXT ou Excel com todas as informações de senha e acesso;
 - Cadastro de usuário inicial: Botão para gera um novo usuário se a base de usuários for vazia;
-- Colorização e Customização das Telas.
+- [x] Colorização e Customização das Telas.
 
 
 ## Modelagem

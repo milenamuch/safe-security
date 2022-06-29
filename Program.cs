@@ -10,15 +10,7 @@ namespace EncryptMe
         {
             Application.EnableVisualStyles();
             Application.Run(new Login());
-            //Console.WriteLine("Hellow");
-            try {
 
-                MessageBox.Show(Controllers.UsuarioController.IncluirUsuario("Administrador", "admin@teste.com", "12345678").ToString());
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
         }
     }
 }
