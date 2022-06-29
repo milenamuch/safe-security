@@ -9,6 +9,7 @@ namespace Views
 {
     public class Tags : BaseForm
     {
+        Title tags;
         public ListView listView;
         ButtonForm btnIncluir;
         ButtonForm btnAlterar;
@@ -20,9 +21,13 @@ namespace Views
         {
             this.parent = parent;
             this.parent.Hide();
+
+            tags = new Title ("Tags", SizeScreen.Medium);
+            tags.Padding = new Padding (20,10,0,0);
+
             listView = new ListView();
-            listView.Location = new Point(20, 20);
-            listView.Size = new Size(560, 510);
+            listView.Location = new Point(20, 50);
+            listView.Size = new Size(560, 480);
             listView.View = View.Details;
             listView.Columns.Add("ID", 60, HorizontalAlignment.Center);
             listView.Columns.Add("Descrição", 500, HorizontalAlignment.Center);
@@ -37,6 +42,7 @@ namespace Views
             btnVoltar = new ButtonForm("Voltar", 480, 550, this.handleVoltar);
 
             this.LoadInfo();
+            this.Controls.Add(tags);
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
             this.Controls.Add(btnAlterar);
