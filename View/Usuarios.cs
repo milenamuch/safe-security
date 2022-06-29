@@ -10,6 +10,7 @@ namespace Views
 {
     public class Usuarios : BaseForm
     {
+        Title usuarios;
         public ListView listView;
 		ButtonForm btnIncluir;
         ButtonForm btnAlterar;
@@ -22,9 +23,11 @@ namespace Views
             this.parent = parent;
             this.parent.Hide();
             
+            usuarios = new Title ("Usuários", SizeScreen.Medium);
+            usuarios.Padding = new Padding (20,10,0,0);
             listView = new ListView();
-			listView.Location = new Point(20, 20);
-			listView.Size = new Size(560,510);
+			listView.Location = new Point(20, 50);
+			listView.Size = new Size(560,480);
 			listView.View = View.Details;
 
 			listView.Columns.Add("ID", 40, HorizontalAlignment.Center);
@@ -41,6 +44,7 @@ namespace Views
             btnVoltar = new ButtonForm("Voltar",  480,550, this.handleVoltar);
 
             this.LoadInfo();
+            this.Controls.Add(usuarios);
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
             this.Controls.Add(btnAlterar);
