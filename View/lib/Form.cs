@@ -1,7 +1,8 @@
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Views.Lib {
+namespace Views.Lib
+{
     public enum SizeScreen
     {
         Small,
@@ -27,7 +28,7 @@ namespace Views.Lib {
                     this.ClientSize = new System.Drawing.Size(600, 600);
                     break;
                 case SizeScreen.Long:
-                this.ClientSize = new System.Drawing.Size(300, 700);
+                    this.ClientSize = new System.Drawing.Size(300, 700);
                     break;
                 default:
                     this.ClientSize = new System.Drawing.Size(300, 300);

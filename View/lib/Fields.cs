@@ -18,15 +18,15 @@ namespace Views.Lib
         )
         {
             lblField = new Label();
-			lblField.Text = Titulo;
+            lblField.Text = Titulo;
             lblField.Location = new Point(X, Y);
             lblField.Size = new Size(WidthTextBox, 20);
-           
 
             txtField = new TextBox();
             txtField.Location = new Point(X, Y + 25);
             txtField.Size = new Size(WidthTextBox, HeightTextBox);
+
         }
     }
-    
+
 }
