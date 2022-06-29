@@ -9,6 +9,7 @@ namespace Views
 		ButtonForm btnCategorias;
         ButtonForm btnSenhas;
         ButtonForm btnTags;
+        Title menu;
         ButtonForm btnUsusario;
         ButtonForm btnSair;
 
@@ -18,12 +19,17 @@ namespace Views
         {
             this.parent = parent;
             this.parent.Hide();
-            btnCategorias = new ButtonForm("Categorias", 100, 30, this.handleCategorias);
-            btnSenhas = new ButtonForm("Senhas", 100, 80, this.handleSenhas);
-            btnTags = new ButtonForm("Tags", 100, 130, this.handleTags);
-            btnUsusario = new ButtonForm("Usuário", 100, 180, this.handleUsuario);
+
+            menu = new Title ("Menu", SizeScreen.Small);
+            menu.Padding = new Padding (125,10,0,0);
+            btnCategorias = new ButtonForm("Categorias", 40, 80, this.handleCategorias);
+            btnSenhas = new ButtonForm("Senhas", 160, 80, this.handleSenhas);
+            btnTags = new ButtonForm("Tags", 40, 150, this.handleTags);
+            btnUsusario = new ButtonForm("Usuário", 160, 150, this.handleUsuario);
             btnSair = new ButtonForm("Sair", 100, 230, this.handleSair);
 
+            
+            this.Controls.Add(menu);
             this.Controls.Add(btnCategorias);
             this.Controls.Add(btnSenhas);
             this.Controls.Add(btnTags);
