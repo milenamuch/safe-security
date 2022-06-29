@@ -9,7 +9,7 @@ namespace Views.Lib
         public Title(string Titulo, SizeScreen W)
         {
 
-			this.Text = Titulo;
+            this.Text = Titulo;
             switch (W)
             {
                 case SizeScreen.Large:
@@ -28,8 +28,7 @@ namespace Views.Lib
             this.BackColor = Color.PaleTurquoise;
             this.Location = new Point(0, 0);
             this.Font = new Font(FontFamily.GenericSansSerif, 12.0F, FontStyle.Bold);
-            
-        }       
+
+        }
     }
-     
 }
