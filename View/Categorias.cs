@@ -9,6 +9,7 @@ namespace Views
 {
     public class Categorias : BaseForm
     {
+        Title categorias;
         public ListView listViewCategorias;
         ButtonForm btnIncluir;
         ButtonForm btnAlterar;
@@ -19,9 +20,13 @@ namespace Views
         {
             this.parent = parent;
             this.parent.Hide();
+
+            categorias = new Title ("Categorias", SizeScreen.Medium);
+            categorias.Padding = new Padding (20,10,0,0);
+
             listViewCategorias = new ListView();
-            listViewCategorias.Location = new Point(20, 20);
-            listViewCategorias.Size = new Size(560, 510);
+            listViewCategorias.Location = new Point(20, 50);
+            listViewCategorias.Size = new Size(560, 480);
             listViewCategorias.View = View.Details;
             listViewCategorias.FullRowSelect = true;
             listViewCategorias.GridLines = true;
@@ -37,6 +42,7 @@ namespace Views
             btnVoltar = new ButtonForm("Voltar", 480, 550, this.handleVoltar);
 
             this.LoadInfo();
+            this.Controls.Add(categorias);
             this.Controls.Add(listViewCategorias);
             this.Controls.Add(btnIncluir);
             this.Controls.Add(btnAlterar);
