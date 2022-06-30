@@ -2,7 +2,6 @@ using Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-//using Repository;
 
 namespace Controllers
 {
@@ -43,7 +42,7 @@ namespace Controllers
             {
                 throw new Exception("Categoria não encontrada.");
             }
-            
+
             Models.Categoria.AlterarCategoria(Id, Nome, Descricao);
             return categoria;
         }
@@ -55,7 +54,7 @@ namespace Controllers
             Categoria categoria = Categoria.GetCategoria(Id);
             Categoria.RemoverCategoria(categoria);
 
-             if (categoria == null)
+            if (categoria == null)
             {
                 throw new Exception("Categoria não encontrada.");
             }
@@ -63,16 +62,16 @@ namespace Controllers
             return categoria;
         }
 
-         public static Categoria GetCategoria(
-            int Id
-        )
+        public static Categoria GetCategoria(
+           int Id
+       )
         {
             Categoria categoria = (
                 from Categoria in Categoria.GetCategorias()
-                    where Categoria.Id == Id
-                    select Categoria
+                where Categoria.Id == Id
+                select Categoria
             ).First();
-            
+
             if (categoria == null)
             {
                 throw new Exception("Categoria não encontrada");

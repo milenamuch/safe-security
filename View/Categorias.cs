@@ -21,8 +21,8 @@ namespace Views
             this.parent = parent;
             this.parent.Hide();
 
-            categorias = new Title ("Categorias", SizeScreen.Medium);
-            categorias.Padding = new Padding (20,10,0,0);
+            categorias = new Title("Categorias", SizeScreen.Medium);
+            categorias.Padding = new Padding(20, 10, 0, 0);
 
             listViewCategorias = new ListView();
             listViewCategorias.Location = new Point(20, 50);
