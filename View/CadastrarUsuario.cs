@@ -10,21 +10,21 @@ namespace Views
         FieldForm fieldNome;
         FieldForm fieldEmail;
         FieldForm fieldSenha;
-		ButtonForm btnConfirmar;
+        ButtonForm btnConfirmar;
         ButtonForm btnCancelar;
         Usuarios parent;
 
-        public CadastrarUsuario(Usuarios parent) : base("Cadastrar Usuario",SizeScreen.Small)
+        public CadastrarUsuario(Usuarios parent) : base("Cadastrar Usuario", SizeScreen.Small)
         {
             this.parent = parent;
 
-            fieldNome = new FieldForm("Nome",30,30,240,20);
-            fieldEmail = new FieldForm("Email",30,90,240,20);
-            fieldSenha = new FieldForm("Senha",30,150,240,20);
+            fieldNome = new FieldForm("Nome", 30, 30, 240, 20);
+            fieldEmail = new FieldForm("Email", 30, 90, 240, 20);
+            fieldSenha = new FieldForm("Senha", 30, 150, 240, 20);
             fieldSenha.txtField.PasswordChar = '⚹';
 
-			btnConfirmar = new ButtonForm("Confirmar", 30, 230, this.handleConfirm);
-            btnCancelar = new ButtonForm("Cancelar", 170,230, this.handleCancel);
+            btnConfirmar = new ButtonForm("Confirmar", 30, 230, this.handleConfirm);
+            btnCancelar = new ButtonForm("Cancelar", 170, 230, this.handleCancel);
 
             this.Controls.Add(fieldNome.lblField);
             this.Controls.Add(fieldNome.txtField);
@@ -39,16 +39,19 @@ namespace Views
 
         private void handleConfirm(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 UsuarioController.IncluirUsuario(
                     this.fieldNome.txtField.Text,
                     this.fieldEmail.txtField.Text,
                     this.fieldSenha.txtField.Text
                 );
-                
+
                 this.parent.LoadInfo();
                 handleCancel(sender, e);
-            } catch (Exception err) {
+            }
+            catch (Exception err)
+            {
                 MessageBox.Show(err.Message);
             }
         }
