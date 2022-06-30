@@ -91,7 +91,8 @@ namespace Controllers
             }
             senha.Nome = Nome;
 
-            try {
+            try
+            {
                 CategoriaController.GetCategoria(CategoriaId);
             }
             catch
@@ -104,12 +105,12 @@ namespace Controllers
                 senha.Url = Url;
             }
 
-             Regex rx = new Regex(
-                "https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+"
-                + "[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+"
-                + "[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))"
-                + "[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,}"
-            );
+            Regex rx = new Regex(
+               "https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+"
+               + "[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+"
+               + "[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))"
+               + "[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,}"
+           );
 
             if (String.IsNullOrEmpty(Url) || !rx.IsMatch(Url))
             {
@@ -121,7 +122,7 @@ namespace Controllers
             {
                 senha.Usuario = Usuario;
             }
-            
+
             if (String.IsNullOrEmpty(SenhaEncrypt))
             {
                 throw new Exception("A senha é obrigatória.");
@@ -136,7 +137,7 @@ namespace Controllers
             {
                 senha.SenhaEncrypt = SenhaEncrypt;
             }
-           
+
             senha.Procedimento = Procedimento;
 
             Models.Senha.AlterarSenha(

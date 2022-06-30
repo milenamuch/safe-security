@@ -24,8 +24,8 @@ namespace Views
             this.parent = parent;
             this.parent.Hide();
 
-            senhas = new Title ("Senhas", SizeScreen.Medium);
-            senhas.Padding = new Padding (20,10,0,0);
+            senhas = new Title("Senhas", SizeScreen.Medium);
+            senhas.Padding = new Padding(20, 10, 0, 0);
 
             listView = new ListView();
             listView.Location = new Point(20, 50);
@@ -46,6 +46,7 @@ namespace Views
             btnExcluir = new ButtonForm("Excluir", 325, 550, this.handleExcluirSenha);
             btnVoltar = new ButtonForm("Voltar", 480, 550, this.handleVoltar);
 
+            this.LoadInfo();
             this.Controls.Add(senhas);
             this.Controls.Add(listView);
             this.Controls.Add(btnIncluir);
