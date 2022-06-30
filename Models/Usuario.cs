@@ -57,7 +57,7 @@ namespace Models
             return base.GetHashCode();
         }
 
-        public static void AlterarUsuario(
+        public static Usuario AlterarUsuario(
             int Id,
             string Nome,
             string Email,
@@ -72,6 +72,8 @@ namespace Models
             Context db = new Context();
             db.Usuarios.Update(usuario);
             db.SaveChanges();
+
+            return GetUsuario(Id);
         }
 
 
@@ -89,6 +91,15 @@ namespace Models
                             select Usuario;
 
             return usuarios.First();
+        }
+
+        public static IEnumerable<Usuario> GetUsuarios(string Email, int Id)
+        {
+            Context db = new Context();
+            return from Usuario in db.Usuarios
+                            where Usuario.Email == Email
+                            && (Id == 0 || Usuario.Id != Id)
+                            select Usuario;
         }
 
         public static void RemoverUsuario(Usuario usuario)
